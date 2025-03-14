@@ -27,4 +27,4 @@ spec:
   sourceRef:
     kind: GitRepository
     name: web-app-gitrepository
-  targetNamespace: default  # Namespace where app will be deployed
+  #targetNamespace: default  # Namespace where app will be deployed
