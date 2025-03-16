@@ -20,7 +20,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./clusters/web-app-autopilot-cluster
+  path: ./clusters/web-app-autopilot-us-central1
   prune: true
   sourceRef:
     kind: GitRepository
