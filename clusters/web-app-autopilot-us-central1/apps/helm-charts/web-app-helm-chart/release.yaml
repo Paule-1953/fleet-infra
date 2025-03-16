@@ -1,0 +1,30 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: web-app-gitrepository
+  namespace: flux-system
+spec:
+  # How often Flux checks your Git repo for changes
+  # Polls GitHub for new commits every 1 minute
+  interval: 1m
+  url: https://github.com/Paule-1953/d24-web-app.git
+  ref:
+    branch: main
+  secretRef:
+    name: github-credentials  # If private repo
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: web-app-kustomization
+  namespace: flux-system
+spec:
+  # How often Flux reconciles the cluster state with Git
+  # Applies changes to your Kubernetes resources every 5 minutes
+  interval: 5m
+  path: "./apps/"
+  prune: true  # Remove resources that are no longer in Git
+  sourceRef:
+    kind: GitRepository
+    name: web-app-gitrepository
+  #targetNamespace: default  # Namespace where app will be deployed
